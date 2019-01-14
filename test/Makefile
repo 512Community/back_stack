@@ -1,9 +1,12 @@
 CC = gcc
 
-LIB = ../lib/libput_crash.so
+LIB = -L../lib -lput_crash
 INCLUDE= -I../include
-target=test
+CFLAGS= -g3 -Wl,-rpath=$(shell pwd)/../lib
+target=BackStackDemo
+
 all:
-	$(CC) -g test.c -o $(target) $(LIB) $(INCLUDE)
+	$(CC) $(CFLAGS) test.c -o $(target) $(LIB) $(INCLUDE) 
+	mv $(target) ../
 clean:
-	rm -rf *.o $(target)
+	rm -rf *.o ../$(target)
